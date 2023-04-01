@@ -1,5 +1,6 @@
 ﻿internal class Program
 {
+    private const string Path = "..\\..\\..\\data.txt";
 
     private static string userInteraction(string choice)
     {
@@ -9,7 +10,7 @@
             try
             {
                 //Pass the file path and file name to the StreamReader constructor
-                StreamReader sr = new StreamReader("C:\\Users\\kasia\\source\\repos\\krypto\\3DES\\3DES\\data.txt");
+                StreamReader sr = new StreamReader(Path);
                 //Read the first line of text
                 input = sr.ReadLine();
                 //Continue to read until you reach end of file
@@ -36,8 +37,15 @@
         }
         else if (choice == "2")
         {
-            Console.WriteLine("Enter text:");
-            input = Console.ReadLine();
+            try
+            {
+                Console.WriteLine("Enter text:");
+                input = Console.ReadLine();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception: " + e.Message);
+            }
         }
         else
         {
