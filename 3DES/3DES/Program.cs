@@ -1,4 +1,7 @@
-﻿internal class Program
+﻿
+using _3DES;
+
+internal class Program
 {
     private const string Path = "..\\..\\..\\data.txt";
 
@@ -9,16 +12,11 @@
         {
             try
             {
-                //Pass the file path and file name to the StreamReader constructor
                 StreamReader sr = new StreamReader(Path);
-                //Read the first line of text
                 input = sr.ReadLine();
-                //Continue to read until you reach end of file
                 while (input != null)
                 {
-                    //write the line to console window
                     Console.WriteLine(input);
-                    //Read the next line
                     input = sr.ReadLine();
                 }
                 //close the file
@@ -56,14 +54,16 @@
 
     private static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World! This is 3DES");
-        Console.WriteLine("1. Read from file data.txt \n2. Enter your text ");
+        //Key key1 = new Key();
+
         string option;
+        Console.WriteLine("Hello, World! This is 3DES");
         Console.WriteLine("Choose what do you want to do:");
+        Console.WriteLine("1. Read from file data.txt \n2. Enter your text \n");
         option = Console.ReadLine();
 
         string text = userInteraction(option);
         Console.WriteLine($"CHOSEN TEXT: \n {text}");
-        
+        byte[] key = Key.GenerateTESTKey();
     }
 }

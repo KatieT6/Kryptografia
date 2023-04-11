@@ -9,7 +9,7 @@ namespace _3DES
     public class Arrays
     {
         ///-----------------------ARRAYS-----------------------
-        private static int[] IPArray = new int[64] {
+        public static readonly int[] IPArray = new int[64] {
                 58,    50,   42,    34,    26,   18,    10,    2,
                 60,    52,   44,    36,    28,   20,    12,    4,
                 62,    54,   46,    38,    30,   22,    14,    6,
@@ -20,7 +20,7 @@ namespace _3DES
                 63,    55,   47,    39,    31,   23,    15,    7
         };
 
-        private static int[,,] S_boxArrays = new int[8, 4, 16] {
+        public static readonly int[,,] S_boxArrays = new int[8, 4, 16] {
             {
                 { 14,4,13,1,2,15,11,8,3,10,6,12,5,9,0,7 },
                 { 0,15,7,4,14,2,13,1,10,6,12,11,9,5,3,8 },
@@ -71,7 +71,7 @@ namespace _3DES
             }
         };
 
-        private static int[] E_bit_selectionArrays = new int[48]{
+        public static readonly int[] E_bit_selectionArrays = new int[48]{
             32,     1,    2,     3,     4,    5,
             4,     5,    6,     7,     8,    9,
             8,     9,   10,    11,    12,   13,
@@ -82,7 +82,7 @@ namespace _3DES
             28,    29,   30,    31,    32,    1,
         };
 
-        private static int[] S_boxPermutation = new int[32]{
+        public static readonly int[] S_boxPermutation = new int[32]{
                 16,   7,  20, 21,
                 29,  12,  28,  17,
                 1,  15,  23,  26,
@@ -93,7 +93,7 @@ namespace _3DES
                 22,  11,   4,  25
         };
 
-        private static int[] IPArrayFinal = new int[64] {
+        public static readonly int[] IPArrayFinal = new int[64] {
                 40,     8,   48,    16,    56,   24,    64,   32,
                 39,     7,   47,    15,    55,   23,    63,   31,
                 38,     6,   46,    14,    54,   22,    62,   30,

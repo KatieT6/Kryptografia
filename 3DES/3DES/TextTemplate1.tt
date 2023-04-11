@@ -1,0 +1,28 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".txt" #>
+
+byte[] outputKey = new byte[7];
+
+            for (int i = 0; i < PC_Arrays.PC1.Length; i++)
+            {
+                int bitIndex = PC_Arrays.PC1[i] - 1;
+                int byteIndex = bitIndex / 8;
+                byte byteToModify = inputKey[byteIndex];
+                byte mask = (byte)(1 << (7 - bitIndex % 8));
+                bool bitValue = (byteToModify & mask) != 0;
+                if (bitValue)
+                {
+                    byteToModify &= (byte)~mask;
+                }
+                else
+                {
+                    byteToModify |= mask;
+                }
+                outputKey[byteIndex] = byteToModify;
+            }
+
+            return outputKey;
