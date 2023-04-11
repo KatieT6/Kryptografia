@@ -80,6 +80,8 @@ namespace _3DES
             {
                 // Shift the two halves of the key according to the shift schedule
                 int shiftCount = PC_Arrays.Shifts[i];
+                
+                //jak nei zadziałą to zmienićfunkcję Shifts tak zeby zwrracała nowe wartości 
                 ShiftLeft(c, shiftCount);
                 ShiftLeft(d, shiftCount);
 

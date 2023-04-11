@@ -14,7 +14,7 @@ namespace _3DES.Tests
     {
         private static readonly byte[] testKey = new byte[] { 0x13, 0x34, 0x57, 0x79, 0x9B, 0xBC, 0xDF, 0xF1 };
         private static readonly byte[] expectedKey = new byte[] { 0x1F, 0x1F, 0x1F, 0x1F, 0x0E, 0x0E, 0x0E };
-        private static readonly byte[] permutedKey = Key.PermutationPC1(testKey);
+        private static readonly byte[][] permutedKey = Key.GenerateSubkeys(testKey);
 
 
         [TestMethod()]
