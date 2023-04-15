@@ -9,7 +9,7 @@ namespace _3DES
     public class Permutation
     {
         // Helper method to permute a byte array using a given permutation table
-        public static byte[] Permute(byte[] value, int[] table)
+        public static byte[] Permute(byte[] value, byte[] table)
         {
             byte[] permuted = new byte[table.Length / 8];
             for (int i = 0; i < table.Length; i++)
@@ -23,7 +23,7 @@ namespace _3DES
                 {
                     int permutedByteIndex = i / 8;
                     int permutedBitIndex = i % 8;
-                    permuted[permutedByteIndex] |= (byte)(1 << permutedBitIndex);
+                    permuted[permutedByteIndex] |= (byte)(1 << (7 - permutedBitIndex));
                 }
             }
             return permuted;

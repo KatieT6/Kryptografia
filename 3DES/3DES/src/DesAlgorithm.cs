@@ -8,6 +8,8 @@ namespace _3DES
 {
     public class DesAlgorithm
     {
+ 
+        public DesAlgorithm() { }
 
         #region Helper methods
 
@@ -83,8 +85,11 @@ namespace _3DES
 
         #endregion
 
-        public static byte[] Encrypt(byte[] permutedMessage, byte[][] subkeys)
+        #region Encrypt
+        public static byte[] Encrypt(byte[] Message, byte[][] subkeys)
         {
+            byte[] permutedMessage = Permutation.InitialPermutation(Message);
+
             byte[] l = new byte[4];
             byte[] r = new byte[4];
             Array.Copy(permutedMessage, 0, l, 0, 4);
@@ -132,6 +137,10 @@ namespace _3DES
 
             return encrypted;
         }
+
+        #endregion
+
+        #region Decrypt
 
         public static byte[] Decrypt(byte[] encryptedMessage, byte[][] subkeys)
         {
@@ -187,9 +196,7 @@ namespace _3DES
             return decrypted;
         }
 
-
-
-
+        #endregion
 
 
 

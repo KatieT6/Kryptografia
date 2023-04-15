@@ -8,7 +8,7 @@ namespace _3DES
 {
     public class PC_Arrays
     {
-        public static readonly int[] PC1 = new int[56]
+        public static readonly byte[] PC1 = new byte[56]
         {
                 57,   49,    41,   33,    25,    17,    9,
                 1,   58,    50,   42,    34,    26,   18,
@@ -19,11 +19,11 @@ namespace _3DES
                 14,    6,    61,   53,    45,    37,   29,
                 21,   13,     5,   28,    20,    12,    4
         };
-        public static readonly int[] Shifts = new int[16]
+        public static readonly byte[] Shifts = new byte[16]
         {
                 1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1
         };
-        public static readonly int[] PC2 = new int[48]
+        public static readonly byte[] PC2 = new byte[48]
         {
                 14,    17,   11,    24,     1,    5,
                 3,     28,   15,     6,    21,   10,

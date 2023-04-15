@@ -11,14 +11,17 @@ namespace _3DES
 {
     public class Key
     {
-        private byte[] key_1 = new byte[8];
+        private byte[] newKey = new byte[8];
+        private byte[][] subKeys = new byte[16][];
 
-        public Key(byte[] key_1)
+        public Key()
         {
-            this.key_1 = GenerateKey(key_1);
+            this.newKey = GenerateKey(newKey);
+            this.SubKeys = GenerateSubKeys(newKey);
         }
 
-        public byte[] Key_1 { get => key_1;}
+        public byte[] NewKey { get => newKey; }
+        public byte[][] SubKeys { get => subKeys; set => subKeys = value; }
 
         //----------------------------------------------
         public static byte[] GenerateKey(byte[] key)
@@ -33,24 +36,11 @@ namespace _3DES
             return key;
         }
 
-        public static byte[] GenerateTESTKey()
-        {
-            string tmp = "1101001100110100010111110110100110001011101111001101010011010011";
+        
+        
 
-            int numOfBytes = 8;
-            byte[] test = new byte[numOfBytes];
-            for (int i = 0; i < numOfBytes; i++)
-            {
-                test[i] = Convert.ToByte(tmp.Substring(8 * i, 8), 2);
-            }
-            
-            string hexKey = BitConverter.ToString(test).Replace("-", "");
-            Console.WriteLine("Key in hex format: " + hexKey);
-            Console.WriteLine("FROM CALCULATOR: D3345F698BBCD4D3\n");
-            return test;
-        }
-
-        private static byte[][] GenerateSubKeys(byte[] key)
+        //First returned value - permuted Key, second is generated SubKey
+        public static byte[][] GenerateSubKeys(byte[] key)
         {
             // Permute the key using the PC-1 table
             byte[] permutedKey = Permutation.Permute(key, PC_Arrays.PC1);
@@ -58,22 +48,18 @@ namespace _3DES
             // Split the permuted key into two 28-bit halves
             byte[] c = new byte[4];
             byte[] d = new byte[4];
-            for (int i = 0; i < 28; i++)
+            for (int i = 0; i < 4; i++)
             {
-                int bitIndex = PC_Arrays.PC1[i] - 1;
-                int byteIndex = bitIndex / 8;
-                int bitMask = 1 << (bitIndex % 8);
-                if ((permutedKey[byteIndex] & bitMask) != 0)
-                {
-                    if (i < 28)
-                    {
-                        c[byteIndex] |= (byte)(1 << (i % 8));
-                    }
-                    else
-                    {
-                        d[byteIndex] |= (byte)(1 << (i % 8));
-                    }
+                if (i < 2)
+                { 
+                    c[i] = permutedKey[i]; 
                 }
+                
+                else
+                { 
+                    d[i] = permutedKey[i]; 
+                }
+                
             }
 
             // Generate the 16 subkeys by rotating the halves and permuting using the PC-2 table

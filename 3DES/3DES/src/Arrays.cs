@@ -9,7 +9,7 @@ namespace _3DES
     public class Arrays
     {
         ///-----------------------ARRAYS-----------------------
-        public static readonly int[] IPArray = new int[64] {
+        public static readonly byte[] IPArray = new byte[64] {
                 58,    50,   42,    34,    26,   18,    10,    2,
                 60,    52,   44,    36,    28,   20,    12,    4,
                 62,    54,   46,    38,    30,   22,    14,    6,
@@ -19,8 +19,8 @@ namespace _3DES
                 61,    53,   45,    37,    29,   21,    13,    5,
                 63,    55,   47,    39,    31,   23,    15,    7
         };
-
-        public static readonly int[] IPInverseArray = new int[64] {
+        //final permutation Array
+        public static readonly byte[] IPInverseArray = new byte[64] {
                 40,  8,  48, 16,  56, 24,  64, 32,
                 39,  7,  47, 15,  55, 23,  63, 31,
                 38,  6,  46, 14,  54, 22,  62, 30,
@@ -31,7 +31,7 @@ namespace _3DES
                 33,  1,  41,  9,  49, 17,  57, 25
         };
 
-        public static readonly int[,] S_boxArrays = new int[8, 64] {
+        public static readonly byte[,] S_boxArrays = new byte[8, 64] {
             {
                  14,4,13,1,2,15,11,8,3,10,6,12,5,9,0,7,
                  0,15,7,4,14,2,13,1,10,6,12,11,9,5,3,8,
@@ -84,7 +84,7 @@ namespace _3DES
 
 
 
-        public static readonly int[] E_bit_selectionArrays = new int[48]{
+        public static readonly byte[] E_bit_selectionArrays = new byte[48]{
             32,     1,    2,     3,     4,    5,
             4,     5,    6,     7,     8,    9,
             8,     9,   10,    11,    12,   13,
@@ -95,7 +95,7 @@ namespace _3DES
             28,    29,   30,    31,    32,    1,
         };
 
-        public static readonly int[] S_boxPermutation = new int[32]{
+        public static readonly byte[] S_boxPermutation = new byte[32]{
                 16,   7,  20, 21,
                 29,  12,  28,  17,
                 1,  15,  23,  26,
@@ -106,15 +106,6 @@ namespace _3DES
                 22,  11,   4,  25
         };
 
-        public static readonly int[] IPArrayFinal = new int[64] {
-                40,     8,   48,    16,    56,   24,    64,   32,
-                39,     7,   47,    15,    55,   23,    63,   31,
-                38,     6,   46,    14,    54,   22,    62,   30,
-                37,     5,   45,    13,    53,   21,    61,   29,
-                36,     4,   44,    12,    52,   20,    60,   28,
-                35,     3,   43,    11,    51,   19,    59,   27,
-                34,     2,   42,    10,    50,   18,    58,   26,
-                33,     1,   41,     9,    49,   17,    57,   25
-        };
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,17 @@ namespace _3DES
             }
 
             return new string(buffer);
+        }
+
+        public static string BytesConverterToString(byte[] bytes)
+        {
+            string keyString = BitConverter.ToString(bytes).Replace("-", "");
+           return keyString;
+        }
+
+        public static string BytesConverterToUTF8(byte[] bytes)
+        {
+            return Encoding.ASCII.GetString(bytes);
         }
     }
 }
