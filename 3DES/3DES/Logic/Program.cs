@@ -64,7 +64,7 @@ internal class Program
 
         string text = userInteraction(option);
         Console.WriteLine($"CHOSEN TEXT: \n {text}");
-
+/*
         byte[] plainText = Converter.StringToBytesUTF8(text);
         //wyspietlamy na razie tylko pierwszy klucz
         Console.WriteLine("generated Key {0} \nText in bytes: {1}\nBytes in text: {2}",Converter.BytesConverterToString(tripleDES.Key11.NewKey), Converter.BytesConverterToString(plainText), Converter.BytesConverterToUTF8(plainText));
@@ -73,5 +73,6 @@ internal class Program
         Console.WriteLine("encrypted text: {0}", Converter.BytesConverterToUTF8(cypher));
         byte[] decrypt = tripleDES.AlgorithmBase(plainText, tripleDES.Key11.SubKeys, tripleDES.Key21.SubKeys, tripleDES.Key31.SubKeys, false);
         Console.WriteLine("decrypted text: {0}", Converter.BytesConverterToUTF8(decrypt));
-    }
+    */}
+
 }

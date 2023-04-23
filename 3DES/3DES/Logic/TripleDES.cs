@@ -25,9 +25,10 @@ namespace _3DES
 
         public byte[] AlgorithmBase(byte[] input, byte[][] subKeys1, byte[][] subKeys2, byte[][] subKeys3, bool isEncryption)
         {
-            byte[] output;
+            byte[] output = new byte[1];
+            output[0] = 0;
 
-            //encode
+           /* //encode
             if (isEncryption)
             {
                 output = DesAlgorithm.Encrypt(input, subKeys1);
@@ -40,7 +41,7 @@ namespace _3DES
                 output = DesAlgorithm.Decrypt(input, subKeys3);
                 output = DesAlgorithm.Encrypt(output, subKeys2);
                 output = DesAlgorithm.Decrypt(output, subKeys1);
-            }
+            }*/
 
             return output;
         }

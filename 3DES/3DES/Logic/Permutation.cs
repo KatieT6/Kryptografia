@@ -29,11 +29,5 @@ namespace _3DES
             return permuted;
         }
 
-
-        //Firs permutation IPArray
-        public static byte[] InitialPermutation(byte[] input)
-        {
-            return Permute(input, Arrays.IPArray);
-        }
     }
 }
