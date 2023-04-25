@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3DES", "3DES\3DES.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3DESTests", "3DESTests\3DESTests.csproj", "{A03A80AF-D080-4A30-B597-68C9F4491BD1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Window", "Window\Window.csproj", "{0D253FED-D96A-4377-8D52-FBD462F6352D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{A03A80AF-D080-4A30-B597-68C9F4491BD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A03A80AF-D080-4A30-B597-68C9F4491BD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A03A80AF-D080-4A30-B597-68C9F4491BD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D253FED-D96A-4377-8D52-FBD462F6352D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D253FED-D96A-4377-8D52-FBD462F6352D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D253FED-D96A-4377-8D52-FBD462F6352D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D253FED-D96A-4377-8D52-FBD462F6352D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

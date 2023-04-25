@@ -22,6 +22,8 @@ namespace _3DES
 
 
 
+
+
         #region Encode
         public static int[] EncodeBlock(int[] block, int[] key, bool isEncrypted)
         {
@@ -189,12 +191,12 @@ namespace _3DES
 
 
         /**
- * Generic Permutation
- *
- * @param input            An Array of ints values that will be permuted
- * @param permutationTable Permutation Table of byte values
- * @return Permuted Array with size of Permutation Table
- */
+     * Generic Permutation
+     *
+     * @param input            An Array of ints values that will be permuted
+     * @param permutationTable Permutation Table of byte values
+     * @return Permuted Array with size of Permutation Table
+     */
         public static int[] Permute(int[] input, byte[] permutationTable)
         {
             int[] result = new int[permutationTable.Length];
