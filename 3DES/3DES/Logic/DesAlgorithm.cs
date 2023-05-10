@@ -9,11 +9,11 @@ namespace _3DES
     public class DesAlgorithm
     {
 
-        private string plainText;
+        private byte[] plainText;
         private readonly string key;
         private readonly bool isEncrypted;
 
-        public DesAlgorithm(string plainText, string key, bool isEncrypted)
+        public DesAlgorithm(byte[] plainText, string key, bool isEncrypted)
         {
             this.plainText = plainText;
             this.key = key;
@@ -77,7 +77,7 @@ namespace _3DES
 
         #region Encrypt
 
-        public string Encrypt()
+        public byte[] Encrypt()
         {
             List<int[]> blocks64bits = new List<int[]>();
 
@@ -86,25 +86,19 @@ namespace _3DES
                 int remainder = plainText.Length % 8;
                 if (remainder != 0)
                 {
-                    for (int i = 0; i < (8 - remainder); i++)
-                        plainText = "~" + plainText;
+                    byte[] bytes = new byte[(plainText.Length/8 + 1)*8];
+                    for (int i = 0; i < plainText.Length; i++)
+                    {
+                        bytes[i] = plainText[i];
+                    }
+                    plainText = bytes;
                 }
             }
 
-            byte[] bytePlainText;
-            if (!isEncrypted)
-            {
-                bytePlainText = Encoding.UTF8.GetBytes(plainText);
-            }
-            else
-            {
-                bytePlainText = Converter.HexFormat(plainText);
-            }
-
-            for (int i = 0; i < bytePlainText.Length; i += 8)
+            for (int i = 0; i < plainText.Length; i += 8)
             {
                 byte[] oneBlock = new byte[8];
-                Array.Copy(bytePlainText, i, oneBlock, 0, 8);
+                Array.Copy(plainText, i, oneBlock, 0, 8);
                 blocks64bits.Add(Converter.ByteArrToIntArr(oneBlock));
             }
 
@@ -118,7 +112,7 @@ namespace _3DES
 
             bool isFirstBlock = true;
 
-            StringBuilder encrypted = new StringBuilder();
+            List<byte> encrypted = new List<byte>();
             for (int i = 0; i < blocks64bits.Count; i++)
             {
                 byte[] bytes = new byte[8];
@@ -127,37 +121,37 @@ namespace _3DES
                     StringBuilder oneByte = new StringBuilder();
                     for (int k = 0; k < 8; k++)
                     {
-                        oneByte.Append(blocks64bits[i][(8 * j) + k]);
+                        oneByte.Append((byte)(blocks64bits[i][(8 * j) + k]));
                     }
                     int decimalValue = Convert.ToInt32(oneByte.ToString(), 2);
                     bytes[j] = (byte)decimalValue;
                 }
                 if (!isEncrypted)
                 {
-                    encrypted.Append(Converter.ByteArrayToHex(bytes));
+                    encrypted.AddRange(bytes);
                 }
                 else
                 {
                     if (isFirstBlock)
                     {
-                        string[] s = Encoding.UTF8.GetString(bytes).Split("");
-                        StringBuilder result = new StringBuilder();
-                        foreach (string n in s)
+                        byte[] s = bytes;
+                        List<byte> result = new List<byte> ();
+                        foreach (byte n in s)
                         {
-                            if (n != "~")
+                            if(n != 0)
                                 result.Append(n);
                         }
-                        encrypted.Append(result);
+                        encrypted.AddRange(result);
                         isFirstBlock = false;
                     }
                     else
                     {
-                        encrypted.Append(Encoding.UTF8.GetString(bytes));
+                        encrypted.AddRange(bytes);
                     }
                 }
             }
 
-            return encrypted.ToString();
+            return encrypted.ToArray();
         }
 
         #endregion
@@ -251,9 +245,8 @@ namespace _3DES
 
                 // Converting element from S-Box table to binary arr with eventually padding
 
-                //POPRAWIĆ POTEM
 
-                byte nr = 1;//Arrays.SBox[i][(decRow * 16) + decColumn];
+                byte nr = Arrays.SBox[i, (decRow * 16) + decColumn];
                 int[] bin = Converter.BinStringToIntArr(Converter.ByteToBin(nr, 4));
 
                 // Update result array

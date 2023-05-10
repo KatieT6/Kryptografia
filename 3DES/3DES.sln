@@ -5,9 +5,9 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3DES", "3DES\3DES.csproj", "{C752E00D-2C24-413D-934A-8C6E2D60502D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3DESTests", "3DESTests\3DESTests.csproj", "{A03A80AF-D080-4A30-B597-68C9F4491BD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3DESTests", "3DESTests\3DESTests.csproj", "{A03A80AF-D080-4A30-B597-68C9F4491BD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Window", "Window\Window.csproj", "{0D253FED-D96A-4377-8D52-FBD462F6352D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Window", "Window\Window.csproj", "{0D253FED-D96A-4377-8D52-FBD462F6352D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -54,7 +54,6 @@ internal class Program
 
     private static void Main(string[] args)
     {
-        TripleDES tripleDES = new TripleDES();
 
         string option;
         Console.WriteLine("Hello, World! This is 3DES");
