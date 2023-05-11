@@ -110,7 +110,6 @@ namespace _3DES
                 blocks64bits[i] = EncodeBlock(blocks64bits[i], binKey, isEncrypted);
             }
 
-            bool isFirstBlock = true;
 
             List<byte> encrypted = new List<byte>();
             for (int i = 0; i < blocks64bits.Count; i++)
@@ -126,23 +125,23 @@ namespace _3DES
                     int decimalValue = Convert.ToInt32(oneByte.ToString(), 2);
                     bytes[j] = (byte)decimalValue;
                 }
+
                 if (!isEncrypted)
                 {
                     encrypted.AddRange(bytes);
                 }
                 else
                 {
-                    if (isFirstBlock)
+                    if (i == blocks64bits.Count - 1)
                     {
                         byte[] s = bytes;
                         List<byte> result = new List<byte> ();
                         foreach (byte n in s)
                         {
                             if(n != 0)
-                                result.Append(n);
+                                result.Add(n);
                         }
                         encrypted.AddRange(result);
-                        isFirstBlock = false;
                     }
                     else
                     {
