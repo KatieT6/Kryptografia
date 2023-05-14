@@ -5,21 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Window"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="550" Width="800">
     <Grid Background="Beige">
-        <Label Content="Key" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Label Content="Hexadecimal value key" HorizontalAlignment="Left" Margin="119,19,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="GeneratedKey_TextArea" HorizontalAlignment="Left"  Margin="70,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="330" TextChanged="GeneratedKey_TextChanged" Height="20"/>
-        <Button x:Name="GenerateKey" Content="Generate Key" Background="AliceBlue" HorizontalAlignment="Left" Margin="451,50,0,0" VerticalAlignment="Top" Click="GenerateKey_Click" Height="20" Width="89"/>
-        <Label Content="Encrypt/Decrypt" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,92,0,0"/>
-        <TextBox x:Name="Decrypted_TextArea" HorizontalAlignment="Left" Margin="70,179,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" Height="190"  TextChanged="Decrypted_TextChanged" UndoLimit="84" IsManipulationEnabled="True"/>
-        <TextBox x:Name="Encrypted_TextArea" HorizontalAlignment="Left" Margin="480,179,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" Height="190" TextChanged="Encrypted_TextChanged"/>
-        <Button x:Name="Encrypt" Content="Encrypt -->" Background="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Top" Width="90" Margin="0,244,0,0" Click="Encrypt_Click"/>
-        <Button x:Name="Decrypt" Content="&lt;-- Decrypt" Background="AliceBlue" HorizontalAlignment="Center" VerticalAlignment="Top" Width="90" Margin="0,284,0,0" Click="Decrypt_Click"/>
-        <Button x:Name="Open_Decrypt" Content="Open File" Background="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="220,144,0,0" Click="OpenDecryptedFile_Click"/>
-        <Button x:Name="Open_Encrypted" Content="Open Cipher File" Background="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="480,144,0,0" Click="OpenEncryptedFile_Click"/>
-        <Button x:Name="Save_File" Content="Save File" Background="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="220,384,0,0" Click="SaveDecryptedFile_Click"/>
-        <Button x:Name="SaveEncrypted_File" Content="Save Encrypted File" Background="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="480,384,0,0" Click="SaveEncryptedFile_Click"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="15*"/>
+            <ColumnDefinition Width="42*"/>
+            <ColumnDefinition Width="103*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Key" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="3" Margin="94,0,0,0"/>
+        <Label Content="Hexadecimal value keys" HorizontalAlignment="Left" Margin="47,37,0,0" VerticalAlignment="Top" Grid.Column="3"/>
+        <TextBox x:Name="GeneratedKey1_TextArea" HorizontalAlignment="Left"  Margin="70,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" TextChanged="GeneratedKey1_TextChanged" Height="20" Grid.ColumnSpan="3"/>
+        <TextBox x:Name="GeneratedKey2_TextArea" HorizontalAlignment="Left"  Margin="15,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" TextChanged="GeneratedKey2_TextChanged" Height="20" Grid.Column="3"/>
+        <TextBox x:Name="GeneratedKey3_TextArea" HorizontalAlignment="Left"  Margin="245,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="200" TextChanged="GeneratedKey3_TextChanged" Height="20" Grid.Column="3"/>
+        <Button x:Name="CheckKey" Content="Check Keys" Background="AliceBlue" HorizontalAlignment="Left" Margin="126,124,0,0" VerticalAlignment="Top" Click="CheckKeys_Click" Height="20" Width="89" Grid.Column="3"/>
+        <Button x:Name="GenerateKey" Content="Generate Key" Background="AliceBlue" Margin="0,124,400,0" VerticalAlignment="Top" Click="GenerateKeys_Click" Height="20" HorizontalAlignment="Right" Width="88" Grid.Column="3" RenderTransformOrigin="0.057,0.502"/>
+        <Label Content="Encrypt/Decrypt" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="39,177,0,0" Grid.Column="3"/>
+        <TextBox x:Name="Decrypted_TextArea" HorizontalAlignment="Left" Margin="70,269,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" Height="190"  TextChanged="Decrypted_TextChanged" UndoLimit="84" IsManipulationEnabled="True" Grid.ColumnSpan="4"/>
+        <TextBox x:Name="Encrypted_TextArea" HorizontalAlignment="Left" Margin="195,269,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="250" Height="190" TextChanged="Encrypted_TextChanged" Grid.Column="3"/>
+        <Button x:Name="Encrypt" Content="Encrypt -->" Background="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Margin="70,334,0,0" Click="Encrypt_Click" Grid.Column="3"/>
+        <Button x:Name="Decrypt" Content="&lt;-- Decrypt" Background="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="90" Margin="70,374,0,0" Click="Decrypt_Click" Grid.Column="3"/>
+        <Button x:Name="Open_Decrypt" Content="Open File" Background="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="145,234,0,0" Click="OpenDecryptedFile_Click" Grid.ColumnSpan="2" Grid.Column="2"/>
+        <Button x:Name="Open_Encrypted" Content="Open Cipher File" Background="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="195,234,0,0" Click="OpenEncryptedFile_Click" Grid.Column="3"/>
+        <Button x:Name="Save_File" Content="Save File" Background="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="145,474,0,0" Click="SaveDecryptedFile_Click" Grid.ColumnSpan="2" Grid.Column="2"/>
+        <Button x:Name="SaveEncrypted_File" Content="Save Encrypted File" Background="AliceBlue" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Margin="195,474,0,0" Click="SaveEncryptedFile_Click" Grid.Column="3"/>
+
 
     </Grid>
 </Window>

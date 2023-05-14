@@ -16,8 +16,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System;
 using System.IO;
-
-
+using System.Security.Cryptography;
+using _3DES.Logic;
 
 namespace Window
 {
@@ -27,10 +27,10 @@ namespace Window
     public partial class MainWindow : System.Windows.Window
     {
 
-        private string key;
+        private string key1;
+        private string key2;
+        private string key3;
 
-        private string decrypted;
-        private string encrypted;
         private byte[]? encryptedBuffer;
         private byte[]? decryptedBuffer;
         private bool onReadFile = false;
@@ -38,8 +38,12 @@ namespace Window
         public MainWindow()
         {
             InitializeComponent();
-            key = new string("0E329232EA6D0D73");
-            GeneratedKey_TextArea.Text = key;
+            key1 = new string("9F4882D692973450");
+            GeneratedKey1_TextArea.Text = key1;
+            key2 = new string("B32847E0D3A685F1");
+            GeneratedKey2_TextArea.Text = key2;
+            key3 = new string("83BF2648CFA0B735");
+            GeneratedKey3_TextArea.Text = key3;
         }
 
         
@@ -47,29 +51,66 @@ namespace Window
         
 
 
-        private void GenerateKey_Click(object sender, RoutedEventArgs e)
+        private void GenerateKeys_Click(object sender, RoutedEventArgs e)
         {
-            string s = GeneratedKey_TextArea.Text;
-            if (s.Length == 16 && System.Text.RegularExpressions.Regex.IsMatch(s, "^[0-9A-Fa-f]+$"))
+            KeyGenerator keyGenerator = new KeyGenerator();
+            byte[] keyBuffer = new byte[16];
+            keyBuffer = keyGenerator.Generate3DesKeys();
+            key1 = Converter.ByteArrayToHex(keyBuffer);
+            GeneratedKey1_TextArea.Text = key1;
+            keyBuffer = keyGenerator.Generate3DesKeys();
+            key2 = Converter.ByteArrayToHex(keyBuffer);
+            GeneratedKey2_TextArea.Text = key2;
+            keyBuffer = keyGenerator.Generate3DesKeys();
+            key3 = Converter.ByteArrayToHex(keyBuffer);
+            GeneratedKey3_TextArea.Text = key3;
+        }
+
+        private void CheckKeys_Click(object sender, RoutedEventArgs e)
+        {
+            string s1 = GeneratedKey1_TextArea.Text;
+            string s2 = GeneratedKey2_TextArea.Text;
+            string s3 = GeneratedKey3_TextArea.Text;
+            if (s1.Length == 16 && System.Text.RegularExpressions.Regex.IsMatch(s1, "^[0-9A-Fa-f]+$") &&
+                s2.Length == 16 && System.Text.RegularExpressions.Regex.IsMatch(s2, "^[0-9A-Fa-f]+$") &&
+                s3.Length == 16 && System.Text.RegularExpressions.Regex.IsMatch(s3, "^[0-9A-Fa-f]+$"))
             {
-                key = s;
-                MessageBox.Show("The key is OK!", "OK", MessageBoxButton.OK, MessageBoxImage.Information);
+                key1 = s1;
+                key2 = s2;
+                key3 = s3;
+                MessageBox.Show("Keys are OK!", "OK", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            else if (s.Length != 16)
+            else if (s1.Length != 16 || s2.Length != 16 || s3.Length != 16)
             {
-                MessageBox.Show("The key length must be 16!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("The every key length must be 16!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
             else
             {
-                MessageBox.Show("The key must be in hexadecimal format!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("The every key must be in hexadecimal format!", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+
+        private void GeneratedKey1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            key1 = GeneratedKey1_TextArea.Text.Length == 0 ? null : GeneratedKey1_TextArea.Text;
+        }
+
+        private void GeneratedKey2_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            key2 = GeneratedKey2_TextArea.Text.Length == 0 ? null : GeneratedKey2_TextArea.Text;
+
+        }
+
+        private void GeneratedKey3_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            key3 = GeneratedKey3_TextArea.Text.Length == 0 ? null : GeneratedKey3_TextArea.Text;
+
         }
 
         private void Encrypt_Click(object sender, RoutedEventArgs e)
         {
-            //decrypted = Encoding.UTF8.GetString(decryptedBuffer);
-            DesAlgorithm des = new DesAlgorithm(decryptedBuffer, key, false);
-            encryptedBuffer = des.Encrypt();
+            DesTripleAlgorithm tripleDES = new DesTripleAlgorithm(key1, key2, key3, decryptedBuffer);
+            encryptedBuffer = tripleDES.encrypt();
             onReadFile = true;
             Encrypted_TextArea.Text = Convert.ToHexString(encryptedBuffer);
 
@@ -77,9 +118,8 @@ namespace Window
 
         private void Decrypt_Click(object sender, RoutedEventArgs e)
         {
-            //encrypted = Encoding.UTF8.GetString(encryptedBuffer);
-            DesAlgorithm des = new DesAlgorithm(encryptedBuffer, key, true);
-            decryptedBuffer = des.Encrypt();
+            DesTripleAlgorithm tripleDES = new DesTripleAlgorithm(key1, key2, key3, encryptedBuffer);
+            decryptedBuffer = tripleDES.decrypt();
             onReadFile = true;
             Decrypted_TextArea.Text = Encoding.UTF8.GetString(decryptedBuffer);
 
@@ -102,11 +142,7 @@ namespace Window
                 onReadFile = false;
         }
 
-        private void GeneratedKey_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            //key = GeneratedKey_TextArea.Text;
-            key = new(GeneratedKey_TextArea.Text);
-        }
+        
 
 
         private void OpenDecryptedFile_Click(object sender, RoutedEventArgs e)
@@ -231,5 +267,7 @@ namespace Window
            
 
         }
+
+       
     }
 }

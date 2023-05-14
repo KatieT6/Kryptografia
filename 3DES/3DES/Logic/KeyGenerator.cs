@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace _3DES.Logic
 {
-    internal class Class1
+    public class KeyGenerator
     {
+        public byte[] Generate3DesKeys()
+        {
+            byte[] key = new byte[8];
+
+            Random random = new Random();
+            random.NextBytes(key);
+
+            return key;
+        }
     }
 }
